@@ -78,7 +78,7 @@ export const Button = styled.button`
     border: none;
     border-radius: 2px;
     background-color: ${props => props.theme.colors.primary};
-    
+    color: black;
     text-transform: uppercase;
     font-weight: bold;
     
