@@ -12,7 +12,7 @@ api.interceptors.request.use(
 
         config.params = {
             ...config.params,
-            api_key: import.meta.env.APP_API_KEY,
+            api_key: 'ccaaf2689b668ef068779f5169e99f1d',
         };
 
         return config;
