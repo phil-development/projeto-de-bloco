@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 
 import ReactLoading from 'react-loading';
 
-import axios from "axios";
-
 import { useTheme } from '../../context/Theme';
 
 import { Movie } from "../../types";
@@ -12,56 +10,46 @@ import { List, LoadContainer } from "./styles";
 
 import MovieCard from "../MovieCard";
 
+import useApi from '../../hooks/useApi';
+
 export default function MovieList() {
 
     const { theme } = useTheme();
-
     const [movies, setMovies] = useState<Movie[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const { response, loading, error } = useApi<{ results: Movie[] }>({
+        method: 'get',
+        url: 'https://api.themoviedb.org/3/discover/movie',
+        params: {
+            language: 'pt-BR',
+        },
+    });
 
     useEffect(() => {
-        getMovies();
-    }, []);
+        if (response) {
+            setMovies(response.results);
+        }
+    }, [response]);
 
-    const getMovies = async () => {
-
-        await axios({
-            method: 'get',
-            url: 'https://api.themoviedb.org/3/discover/movie',
-            params: {
-                api_key: 'ccaaf2689b668ef068779f5169e99f1d',
-                language: 'pt-BR'
-            }
-        }).then(response => {
-            setMovies(response.data.results);
-        });
-
-        setIsLoading(false);
-
-    };
-
-    getMovies();
-
-    if (isLoading) {
-
+    if (loading) {
         return (
             <LoadContainer>
                 <ReactLoading type={'bars'} color={theme.colors.primary} height={'5%'} width={'5%'} />
             </LoadContainer>
         );
+    }
 
-    } else {
-
+    if (error) {
         return (
-
-            <List>
-
-                {movies.map(movie => (
-                    <MovieCard key={movie.id} data={movie} />
-                ))}
-
-            </List>
-
+            <div>Erro: {error}</div>
         );
-    };
+    }
+
+    return (
+        <List>
+            {movies.map(movie => (
+                <MovieCard key={movie.id} data={movie} />
+            ))}
+        </List>
+    );
 };

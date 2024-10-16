@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Card, Description, Info, Poster, HiddenContent, Button } from "./styles";
 
+import { useNavigate } from "react-router-dom";
+
 import StarRating from "../StarRating";
 
 import { Movie } from "../../types";
@@ -9,11 +11,13 @@ interface CardProps {
 
     data: Movie;
 
-}
+};
 
 export default function MovieCard({ data }: CardProps) {
 
     const [isHovered, setIsHovered] = useState(false);
+
+    const navigate = useNavigate();
 
     return (
         <Card>
@@ -38,7 +42,7 @@ export default function MovieCard({ data }: CardProps) {
                     0 && <StarRating rating={data.vote_average} />
                 }
 
-                <HiddenContent style={{ opacity: isHovered ? 1 : .5, height: isHovered ? '98px' : '0' }}>
+                <HiddenContent style={{ opacity: isHovered ? 1 : .5, height: isHovered ? 'auto' : '0px' }}>
 
                     {data.overview &&
                         <Description>
@@ -52,7 +56,7 @@ export default function MovieCard({ data }: CardProps) {
                         </Description>
                     }
 
-                    <Button>Ver Mais</Button>
+                    <Button onClick={() => navigate(`/projeto-de-bloco/movieInfo/${data.id}`)}>Ver Mais</Button>
 
                 </HiddenContent>
 

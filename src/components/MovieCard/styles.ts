@@ -63,7 +63,6 @@ export const HiddenContent = styled.div`
     font-size: 12px;
     color: ${props => props.theme.colors.white};
     overflow: hidden;
-    transition: height .5s ease;
 
 `;
 

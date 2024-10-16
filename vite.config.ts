@@ -4,5 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/projeto-de-bloco-tp2/'
+  envPrefix: 'APP_',
+  base: '/projeto-de-bloco/'
 })

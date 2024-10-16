@@ -11,6 +11,6 @@ export const Content = styled.main`
 
     width: 100%;
     min-height: 100vh;
-    padding: calc(1rem + 64px) 1rem 1rem;
+    padding: calc(1rem + 96px) 1rem 1rem;
 
 `;

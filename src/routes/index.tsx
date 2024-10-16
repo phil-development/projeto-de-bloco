@@ -4,12 +4,17 @@ import {
 } from "react-router-dom";
 
 import Home from "../pages/Home";
+import MovieInfo from "../pages/MovieInfo";
 
 const router = createBrowserRouter([
     {
-        path: '/projeto-de-bloco-tp2',
+        path: '/projeto-de-bloco',
         element: <Home />
     },
+    {
+        path: '/projeto-de-bloco/movieInfo/:id',
+        element: <MovieInfo />
+    }
 ]);
 
 export default function Routes() {

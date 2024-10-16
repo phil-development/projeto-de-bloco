@@ -9,7 +9,7 @@ interface PropsMenuState {
 export const Container = styled.nav`
 
     width: 100%;
-    height: 64px;
+    height: 96px;
     position: fixed;
     display: flex;
     align-items: center;
@@ -169,7 +169,7 @@ export const MenuItems = styled.div<PropsMenuState>`
         
         display: ${props => props.state ? 'flex' : 'none'};
         position: fixed;
-        top: calc(64px + 6px);
+        top: calc(96px + 6px);
         right: 6px;
 
         align-items: center;

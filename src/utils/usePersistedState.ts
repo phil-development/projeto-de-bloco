@@ -21,6 +21,6 @@ function usePersistedState<T>(key: string, initialState: T): Response<T> {
     }, [key, state]);
 
     return [state, setState];
-}
+};
 
 export default usePersistedState;
