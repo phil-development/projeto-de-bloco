@@ -1,8 +1,12 @@
-import { MdKeyboardBackspace } from "react-icons/md"
+import { useEffect, useState } from "react";
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import Footer from "../../components/Footer";
+import { MdKeyboardBackspace } from "react-icons/md"
+
+import useApi from "../../hooks/useApi";
+
+import { Movie } from "../../types";
 
 import {
     Container,
@@ -11,13 +15,29 @@ import {
     Content,
 } from './styles';
 
-export default function MovieInfo() {
+import Footer from "../../components/Footer";
 
-    const { id } = useParams();
+export default function MovieInfo() {
 
     const navigate = useNavigate();
 
-    return (
+    const { id } = useParams();
+
+    const { response, error } = useApi<Movie>({
+        method: 'get',
+        url: `https://api.themoviedb.org/3/movie/${id}`,
+        params: {
+            language: 'pt-BR',
+        },
+    });
+
+    if (error) {
+        return (
+            <div>Erro: {error}</div>
+        );
+    }
+
+    if (response) return (
         <Container>
 
             <Header>
@@ -31,6 +51,8 @@ export default function MovieInfo() {
             </Header>
 
             <Content>
+
+                <h1>{response.title}</h1>
 
             </Content>
 

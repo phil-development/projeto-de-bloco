@@ -43,7 +43,7 @@ export const BackButton = styled.button`
 export const Content = styled.main`
 
     width: 100%;
-    min-height: calc(100vh - 96px);
+    min-height: calc(100vh - 96px - 48px);
 
     display: flex;
     flex-direction: column;
