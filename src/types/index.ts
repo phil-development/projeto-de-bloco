@@ -5,5 +5,11 @@ export interface Movie {
     overview: string;
     poster_path: string;
     vote_average: number;
+    videos: {
+        results: {
+            type: string;
+            key: string;
+        }[];
+    };
 
 };
