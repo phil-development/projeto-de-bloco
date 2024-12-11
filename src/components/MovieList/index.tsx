@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
 
-import ReactLoading from 'react-loading';
-
-import { useTheme } from '../../context/Theme';
-
 import { Movie } from "../../types";
 
-import { List, LoadContainer } from "./styles";
+import { List } from "./styles";
 
 import MovieCard from "../MovieCard";
+
+import Loading from "../Loading";
 
 import useApi from '../../hooks/useApi';
 
 export default function MovieList() {
 
-    const { theme } = useTheme();
     const [movies, setMovies] = useState<Movie[]>([]);
 
     const { response, loading, error } = useApi<{ results: Movie[] }>({
@@ -33,9 +30,7 @@ export default function MovieList() {
 
     if (loading) {
         return (
-            <LoadContainer>
-                <ReactLoading type={'bars'} color={theme.colors.primary} height={'5%'} width={'5%'} />
-            </LoadContainer>
+            <Loading />
         );
     }
 

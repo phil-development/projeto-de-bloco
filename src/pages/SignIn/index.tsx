@@ -3,7 +3,7 @@ import api from '../../config/api';
 import { Container, Button } from './styles';
 
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
-const REDIRECT_URL = 'http://localhost:5173/projeto-de-bloco/callback';
+const REDIRECT_URL = 'https://phil-development.github.io/projeto-de-bloco/callback';
 
 const Login: React.FC = () => {
   const [error, setError] = useState('');

@@ -1,9 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
-
-import { MdKeyboardBackspace } from "react-icons/md"
+import { MdKeyboardBackspace } from "react-icons/md";
 
 import useApi from "../../hooks/useApi";
-
 import { Movie } from "../../types";
 
 import {
@@ -11,21 +9,34 @@ import {
     Header,
     BackButton,
     Content,
+    Info,
+    Details,
+    Trailer,
 } from './styles';
 
-import { Footer } from "../../components/";
+import StarRating from '../../components/StarRating';
+import Loading from '../../components/Loading';
+import Footer from "../../components/Footer";
+
+interface MovieApiResponse extends Movie {
+    videos: {
+        results: {
+            type: string;
+            key: string;
+        }[]
+    }
+}
 
 export default function MovieInfo() {
-
     const navigate = useNavigate();
-
     const { id } = useParams();
 
-    const { response, error } = useApi<Movie>({
+    const { response, loading, error } = useApi<MovieApiResponse>({
         method: 'get',
         url: `https://api.themoviedb.org/3/movie/${id}`,
         params: {
             language: 'pt-BR',
+            append_to_response: 'videos',
         },
     });
 
@@ -35,27 +46,72 @@ export default function MovieInfo() {
         );
     }
 
-    if (response) return (
-        <Container>
+    if (loading) {
+        return (
+            <Loading />
+        );
+    }
 
-            <Header>
+    if (response && response.videos && response.videos.results) {
 
-                <BackButton onClick={() => navigate(-1)}>
+        const trailers = response.videos.results.filter(
+            (video) => video.type === 'Trailer'
+        );
 
-                    <MdKeyboardBackspace />
+        const trailerKey = trailers.length > 0 ? trailers[0].key : null;
 
-                </BackButton>
+        return (
+            <Container>
 
-            </Header>
+                <Header>
 
-            <Content>
+                    <BackButton onClick={() => navigate(-1)}>
 
-                <h1>{response.title}</h1>
+                        <MdKeyboardBackspace />
 
-            </Content>
+                    </BackButton>
 
-            <Footer />
+                    <h1>Detalhes</h1>
 
-        </Container>
-    );
+                </Header>
+
+                <Content>
+
+                    <Info>
+                        <img src={`https://image.tmdb.org/t/p/original/${response.poster_path}`} alt={response.title} />
+
+                        <Details>
+
+                            <h2>{response.title}</h2>
+                            <StarRating rating={response.vote_average} />
+                            <p>{response.overview}</p>
+
+                        </Details>
+
+                    </Info>
+
+                    {trailerKey && (
+
+                        <Trailer>
+                            <iframe
+                                src={`https://www.youtube.com/embed/${trailerKey}`}
+                                title="Trailer do Filme"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+
+                            ></iframe>
+                        </Trailer>
+
+                    )}
+                </Content>
+
+                <Footer />
+
+            </Container>
+        );
+
+    } else {
+
+        return <div>Erro ao carregar informações do filme.</div>;
+    }
 };
