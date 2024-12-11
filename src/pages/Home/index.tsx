@@ -1,8 +1,6 @@
 import { Container, Content } from './styles';
 
-import Menu from '../../components/Menu';
-import MovieList from '../../components/MovieList';
-import Footer from '../../components/Footer';
+import { Menu, MovieList, Footer } from '../../components/';
 
 export default function Home() {
 

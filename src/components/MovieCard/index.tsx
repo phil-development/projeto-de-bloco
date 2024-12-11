@@ -56,7 +56,7 @@ export default function MovieCard({ data }: CardProps) {
                         </Description>
                     }
 
-                    <Button onClick={() => navigate(`/projeto-de-bloco/movieInfo/${data.id}`)}>Ver Mais</Button>
+                    <Button onClick={() => navigate(`/movieInfo/${data.id}`)}>Ver Mais</Button>
 
                 </HiddenContent>
 

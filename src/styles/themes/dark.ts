@@ -4,15 +4,14 @@ export default {
 
     colors: {
 
-        black: '#141414',
         white: '#f1f5f9',
         yellow: '#f3eb00',
 
         primary: '#5A8FE6',
         secondary: '#5A8FE6',
-        background: '#272727',
-        component: '#202020',
-        items: '#414141',
+        background: '#141414',
+        component: '#000000',
+        items: '#23242b',
         text: '#f9fdf1',
 
     }

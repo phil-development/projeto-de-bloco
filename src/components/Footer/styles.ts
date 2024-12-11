@@ -9,6 +9,6 @@ export const Container = styled.footer`
     align-items: center;
     justify-content: center;
     
-    background-color: ${props => props.theme.title === "dark" ? props.theme.colors.black : props.theme.colors.component};
+    background-color: ${props => props.theme.colors.component};
 
 `;

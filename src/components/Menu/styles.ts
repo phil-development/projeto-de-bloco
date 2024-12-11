@@ -9,7 +9,7 @@ interface PropsMenuState {
 export const Container = styled.nav`
 
     width: 100%;
-    height: 96px;
+    height: 72px;
     position: fixed;
     display: flex;
     align-items: center;
@@ -17,7 +17,7 @@ export const Container = styled.nav`
     z-index: 999;
     padding: 0 1rem;
 
-    background-color: ${props => props.theme.colors.component};
+    background-color: ${props => props.theme.colors.background};
 
 `;
 

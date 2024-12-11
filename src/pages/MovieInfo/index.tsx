@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { MdKeyboardBackspace } from "react-icons/md"
@@ -15,7 +13,7 @@ import {
     Content,
 } from './styles';
 
-import Footer from "../../components/Footer";
+import { Footer } from "../../components/";
 
 export default function MovieInfo() {
 
