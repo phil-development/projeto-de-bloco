@@ -10,7 +10,7 @@ import MovieInfo from '../pages/MovieInfo';
 
 const AppRoutes: React.FC = () => {
     return (
-        <BrowserRouter basename="/projeto-de-bloco/">
+        <BrowserRouter basename="/">
             <Routes>
                 <Route path="/signIn" element={<PublicRoute><SignIn /></PublicRoute>} />
                 <Route path="/callback" element={<Callback />} />
