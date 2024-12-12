@@ -28,12 +28,10 @@ const Callback: React.FC = () => {
                     console.log('Sessão criada:', sessionId);
                     console.log('ID do usuário:', userId);
 
-                    // Redireciona para a home após o login
                     navigate('/');
 
                 } catch (error) {
                     console.error('Erro ao criar sessão:', error);
-                    // Lidar com o erro (ex: exibir mensagem, redirecionar para login)
                 }
             }
         };

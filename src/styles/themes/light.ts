@@ -4,7 +4,6 @@ export default {
 
     colors: {
 
-        black: '#141414',
         white: '#f1f5f9',
         yellow: '#f3eb00',
 
