@@ -12,7 +12,7 @@ api.interceptors.request.use(
 
         config.params = {
             ...config.params,
-            api_key: 'ccaaf2689b668ef068779f5169e99f1d',
+            api_key: import.meta.env.APP_TMDB_API_KEY,
         };
 
         return config;

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import api from '../../config/api';
 import { Container, Button } from './styles';
 
-const TMDB_API_URL = 'https://api.themoviedb.org/3';
-const REDIRECT_URL = 'https://phil-development.github.io/projeto-de-bloco/callback';
+const TMDB_API_URL = import.meta.env.APP_TMDB_API_URL;
+const REDIRECT_URL = import.meta.env.APP_REDIRECT_URL;
 
-const Login: React.FC = () => {
+const SignIn: React.FC = () => {
   const [error, setError] = useState('');
 
   const handleLogin = async () => {
@@ -30,4 +30,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignIn;
