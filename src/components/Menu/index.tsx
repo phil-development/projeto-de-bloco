@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
     Container,
+    Logo,
     LeftContent,
     RightContent,
     LateralNavigation,
@@ -45,7 +46,7 @@ export const Menu: React.FC = () => {
 
                 </ToggleMenu>
 
-                <h1>PHTV</h1>
+                <Logo isOpen={isOpenMenu}>PHTV</Logo>
 
                 <LateralNavigation isOpen={isOpenMenu}>
 

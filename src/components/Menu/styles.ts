@@ -15,28 +15,32 @@ export const Container = styled.nav`
 
 `;
 
-export const LeftContent = styled.div`
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+export const Logo = styled.h1<{ isOpen: boolean }>`
 
-    h1 {
+    z-index: 3;
+    margin: 0 1rem;
+    font-size: clamp(1.5rem, 1vw, 3rem); 
+    display: block;
 
-        z-index: 3;
-        margin: 0 1rem;
+    @media (max-width: 524px) {
+        
+        display: ${({isOpen}) => isOpen ? 'block' : 'none'};
 
     }
 
     @media (max-width: 320px) {
         
-        h1 {
-
-            display: none;
-
-        }
+        display: none;
 
     }
+
+`;
+
+export const LeftContent = styled.div`
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 `;
 
@@ -139,7 +143,7 @@ export const ToggleMenu = styled.button`
 
     }
 
-    @media (max-width: 320px) {
+    @media (max-width: 524px) {
         
         margin: 0 1rem 0 0;
     }
@@ -189,12 +193,6 @@ export const Profile = styled.button`
         color: ${({ theme }) => theme.colors.text};
 
     }
-
-    @media (max-width: 524px) {
-
-        margin: 0 1rem;
-
-    };
 
 `;
 
