@@ -1,11 +1,5 @@
 import styled from "styled-components";
 
-interface PropsMenuState {
-
-    state: boolean;
-
-}
-
 export const Container = styled.nav`
 
     width: 100%;
@@ -17,7 +11,7 @@ export const Container = styled.nav`
     z-index: 999;
     padding: 0 1rem;
 
-    background-color: ${props => props.theme.colors.background};
+    background-color: ${({ theme }) => theme.colors.background};
 
 `;
 
@@ -46,7 +40,7 @@ export const LeftContent = styled.div`
 
 `;
 
-export const LateralNavigation = styled.div<PropsMenuState>`
+export const LateralNavigation = styled.div<{ isOpen: boolean }>`
 
     width: 300px;
     height: 100vh;
@@ -60,8 +54,8 @@ export const LateralNavigation = styled.div<PropsMenuState>`
     z-index: 2;
 
     top: 0;
-    left: ${props => props.state ? '0' : '-100%'};
-    background-color: ${props => props.theme.colors.component};
+    left: ${props => props.isOpen ? '0' : '-100%'};
+    background-color: ${({ theme }) => theme.colors.component};
     transition: all .3s ease;
 
     ul {
@@ -84,7 +78,7 @@ export const LateralNavigation = styled.div<PropsMenuState>`
 
             a {     
 
-                color: ${props => props.theme.colors.text};
+                color: ${({ theme }) => theme.colors.text};
                 text-decoration: none;
                 text-transform: uppercase;
 
@@ -133,7 +127,7 @@ export const ToggleMenu = styled.button`
     min-width: 32px;
     min-height: 32px;
     background-color: transparent;
-    color: ${props => props.theme.colors.text};
+    color: ${({ theme }) => theme.colors.text};
     border: none;
     cursor: pointer;
     z-index: 3;
@@ -161,60 +155,38 @@ export const RightContent = styled.div`
 
 `;
 
-export const MenuItems = styled.div<PropsMenuState>`
+export const ProfileMenu = styled.div`
 
-    display: block;
-
-    @media (max-width: 524px) {
-        
-        display: ${props => props.state ? 'flex' : 'none'};
-        position: fixed;
-        top: calc(96px + 6px);
-        right: 6px;
-
-        align-items: center;
-        justify-content: space-around;
-
-        padding: 1rem;
-        background-color: ${props => props.theme.colors.component};
-
-    };
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 `;
 
-export const ToggleMenuItems = styled(ToggleMenu)`
+export const Profile = styled.button`
 
-    max-width: 24px;
-    max-height: 24px;
-    min-width: 24px;
-    min-height: 24px;
+    width: 32px;
+    height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+
+    background-color: ${({ theme }) => theme.colors.items};
+    color: ${({ theme }) => theme.colors.text};
+    
     margin: 0 0 0 1rem;
-    display: none;
-    z-index: 1;
-    user-select: none;
+    padding: .3rem;
 
-    @media (max-width: 524px) {
-
-        display: block;
-
-    };
-
-`;
-
-export const Items = styled.button`
-
-    min-width: 24px;
-    min-height: 24px;
-    margin: 0 0 0 1rem;
-    background-color: transparent;
-    color: ${props => props.theme.colors.text};
     border: none;
+    border-radius: 2px;
     cursor: pointer;
 
     svg {
 
-        width: 100%;
-        height: 100%;
+        width: 80%;
+        height: 80%;
+        color: ${({ theme }) => theme.colors.text};
 
     }
 
@@ -223,5 +195,35 @@ export const Items = styled.button`
         margin: 0 1rem;
 
     };
+
+`;
+
+export const ProfileContent = styled.div<{ isOpen: boolean }>`
+
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: ${({ theme }) => theme.colors.items};
+    z-index: 1;
+    min-width: 128px;
+
+`;
+
+export const ProfileItem = styled.button`
+
+    width: 100%;
+    padding: 1rem;
+
+    border: none;
+    outline: none;
+    color: ${({ theme }) => theme.colors.text};
+    background-color: transparent;
+    cursor: pointer;
+
+
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.primary};
+    }
 
 `;

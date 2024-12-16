@@ -43,7 +43,7 @@ export const Info = styled.div`
     h1 {
         font-size: 12px;
         margin: 0 0 8px 0;
-        color: ${props => props.theme.colors.white};
+        color: ${({ theme }) => theme.colors.white};
     }
 
     &:hover {
@@ -61,7 +61,7 @@ export const HiddenContent = styled.div`
     opacity: 0;
     margin: 8px 0 0 0;
     font-size: 12px;
-    color: ${props => props.theme.colors.white};
+    color: ${({ theme }) => theme.colors.white};
     overflow: hidden;
 
 `;
@@ -76,7 +76,7 @@ export const Button = styled.button`
     margin: 8px 0 0 0;
     border: none;
     border-radius: 2px;
-    background-color: ${props => props.theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.primary};
     color: black;
     text-transform: uppercase;
     font-weight: bold;

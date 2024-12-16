@@ -4,45 +4,55 @@ import {
     LeftContent,
     RightContent,
     LateralNavigation,
-    MenuItems,
-    Items,
+    ProfileMenu,
+    Profile,
     ToggleMenu,
-    ToggleMenuItems,
+    ProfileContent,
+    ProfileItem
 } from './styles';
 
-import { IoMdMenu, IoMdClose, IoMdNotifications } from "react-icons/io";
-import { SlOptionsVertical } from "react-icons/sl";
-import { FaCircleUser } from "react-icons/fa6";
-import { FaStar } from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
+import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { FaUser } from "react-icons/fa6";
 
-import Search from '../Search/';
-import ToggleTheme from '../ToggleTheme';
+import { ToggleTheme, Search } from '../index';
+import { logout } from '../../utils/auth';
 
 export const Menu: React.FC = () => {
 
-    const [lateralNavigationState, setLateralNavigationState] = useState(false);
-    const [lateralItemsState, setLateralItemsState] = useState(false);
+    const navigate = useNavigate();
+
+    const [isOpenMenu, setIsOpenMenu] = useState(false);
+    const [isOpenProfile, setIsOpenProfile] = useState(false);
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/signIn');
+    };
+
+    const toggleProfileMenu = () => {
+        setIsOpenProfile(!isOpenProfile);
+    };
 
     return (
         <Container>
 
             <LeftContent>
 
-                <ToggleMenu onClick={() => setLateralNavigationState(!lateralNavigationState)}>
+                <ToggleMenu onClick={() => setIsOpenMenu(!isOpenMenu)}>
 
-                    {lateralNavigationState ? <IoMdClose /> : <IoMdMenu />}
+                    {isOpenMenu ? <IoMdClose /> : <IoMdMenu />}
 
                 </ToggleMenu>
 
                 <h1>PHTV</h1>
 
-                <LateralNavigation state={lateralNavigationState}>
+                <LateralNavigation isOpen={isOpenMenu}>
 
                     <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Filmes</a></li>
-                        <li><a href="#">Series</a></li>
-
+                        <li><Link to='/' />Inicio</li>
+                        <li><Link to='/' />Filmes</li>
+                        <li><Link to='/' />Series</li>
                     </ul>
 
                 </LateralNavigation>
@@ -55,33 +65,19 @@ export const Menu: React.FC = () => {
 
                 <ToggleTheme />
 
-                <ToggleMenuItems onClick={() => setLateralItemsState(!lateralItemsState)}>
+                <ProfileMenu>
 
-                    <SlOptionsVertical />
+                    <Profile onClick={toggleProfileMenu}>
 
-                </ToggleMenuItems>
+                        <FaUser />
 
-                <MenuItems state={lateralItemsState}>
+                    </Profile>
 
-                    <Items>
+                    <ProfileContent isOpen={isOpenProfile}>
+                        <ProfileItem onClick={handleLogout}>Logout</ProfileItem>
+                    </ProfileContent>
 
-                        <IoMdNotifications />
-
-                    </Items>
-
-                    <Items>
-
-                        <FaStar />
-
-                    </Items>
-
-                    <Items>
-
-                        <FaCircleUser />
-
-                    </Items>
-
-                </MenuItems>
+                </ProfileMenu>
 
             </RightContent>
 

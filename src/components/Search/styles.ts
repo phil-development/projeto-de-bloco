@@ -6,7 +6,7 @@ export const Container = styled.div`
     max-width: 196px;
     height: 32px;
     border-radius: 2px;
-    background-color: ${props => props.theme.colors.items};
+    background-color: ${({ theme }) => theme.colors.items};
     display: flex;
 
     input {
@@ -17,12 +17,12 @@ export const Container = styled.div`
         border: none;
         background: transparent;
         padding: 4px 4px 4px 0;
-        color: ${props => props.theme.colors.text};
+        color: ${({ theme }) => theme.colors.text};
         letter-spacing: .1rem;
 
         &::placeholder {
 
-            color: ${props => props.theme.colors.text};
+            color: ${({ theme }) => theme.colors.text};
             opacity: .5;
 
         }
@@ -36,7 +36,7 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        color: ${props => props.theme.colors.text};
+        color: ${({ theme }) => theme.colors.text};
         cursor: text;
 
         svg {

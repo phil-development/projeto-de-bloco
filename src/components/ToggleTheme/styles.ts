@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.button`
 
+    width: 32px;
+    height: 32px;
     max-width: 32px;
     max-height: 32px;
     min-width: 32px;
