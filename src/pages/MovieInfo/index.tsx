@@ -1,7 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { MdKeyboardBackspace } from "react-icons/md";
+import axios from "axios";
 
-import useApi from "../../hooks/useApi";
 import { Movie } from "../../types";
 
 import {
@@ -12,10 +13,10 @@ import {
     Info,
     Details,
     Trailer,
-} from './styles';
+} from "./styles";
 
-import StarRating from '../../components/StarRating';
-import Loading from '../../components/Loading';
+import StarRating from "../../components/StarRating";
+import Loading from "../../components/Loading";
 import Footer from "../../components/Footer";
 
 interface MovieApiResponse extends Movie {
@@ -23,97 +24,97 @@ interface MovieApiResponse extends Movie {
         results: {
             type: string;
             key: string;
-        }[]
-    }
+        }[];
+    };
 }
 
 const MovieInfo: React.FC = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const [movie, setMovie] = useState<MovieApiResponse | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const { response, loading, error } = useApi<MovieApiResponse>({
-        method: 'get',
-        url: `https://api.themoviedb.org/3/movie/${id}`,
-        params: {
-            language: 'pt-BR',
-            append_to_response: 'videos',
-        },
-    });
+    useEffect(() => {
+        const fetchMovieData = async () => {
+            try {
+                const response = await axios.get<MovieApiResponse>(
+                    `https://api.themoviedb.org/3/movie/${id}`,
+                    {
+                        params: {
+                            language: "pt-BR",
+                            append_to_response: "videos",
+                            api_key: import.meta.env.APP_TMDB_API_KEY,
+                        },
+                    }
+                );
+                setMovie(response.data);
+            } catch (err) {
+                setError("Erro ao carregar informações do filme.");
+                console.error("Erro na requisição Axios:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    if (error) {
-        return (
-            <div>Erro: {error.message}</div>
-        );
-    }
+        fetchMovieData();
+    }, [id]);
 
     if (loading) {
-        return (
-            <Loading />
-        );
+        return <Loading />;
     }
 
-    if (response && response.videos && response.videos.results) {
-
-        const trailers = response.videos.results.filter(
-            (video) => video.type === 'Trailer'
-        );
-
-        const trailerKey = trailers.length > 0 ? trailers[0].key : null;
-
-        return (
-            <Container>
-
-                <Header>
-
-                    <BackButton onClick={() => navigate(-1)}>
-
-                        <MdKeyboardBackspace />
-
-                    </BackButton>
-
-                    <h1>Detalhes</h1>
-
-                </Header>
-
-                <Content>
-
-                    <Info>
-                        <img src={`https://image.tmdb.org/t/p/original/${response.poster_path}`} alt={response.title} />
-
-                        <Details>
-
-                            <h2>{response.title}</h2>
-                            <StarRating rating={response.vote_average} />
-                            <p>{response.overview}</p>
-
-                        </Details>
-
-                    </Info>
-
-                    {trailerKey && (
-
-                        <Trailer>
-                            <iframe
-                                src={`https://www.youtube.com/embed/${trailerKey}`}
-                                title="Trailer do Filme"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-
-                            ></iframe>
-                        </Trailer>
-
-                    )}
-                </Content>
-
-                <Footer />
-
-            </Container>
-        );
-
-    } else {
-
-        return <div>Erro ao carregar informações do filme.</div>;
+    if (error) {
+        return <div>{error}</div>;
     }
+
+    if (!movie) {
+        return <div>Filme não encontrado.</div>;
+    }
+
+    return (
+        <Container>
+            <Header>
+                <BackButton onClick={() => navigate(-1)}>
+                    <MdKeyboardBackspace />
+                </BackButton>
+                <h1>Detalhes</h1>
+            </Header>
+
+            <Content>
+                <Info>
+                    <img
+                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                        alt={movie.title}
+                    />
+                    <Details>
+                        <h2>{movie.title}</h2>
+                        <StarRating rating={movie.vote_average} />
+                        <p>{movie.overview}</p>
+                    </Details>
+                </Info>
+
+                {movie.videos && movie.videos.results && (
+                    <>
+                        {movie.videos.results
+                            .filter((video) => video.type === "Trailer")
+                            .map((trailer) => (
+                                <Trailer key={trailer.key}>
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${trailer.key}`}
+                                        title="Trailer do Filme"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                </Trailer>
+                            ))}
+                    </>
+                )}
+            </Content>
+
+            <Footer />
+        </Container>
+    );
 };
 
 export default MovieInfo;
