@@ -9,7 +9,8 @@ export const Container = styled.div`
 
 export const Content = styled.main`
 
-    flex: 1;
+    width: 100%;
+    min-height: 100vh;
     padding: 72px 1rem 1rem 1rem;
 
 `;

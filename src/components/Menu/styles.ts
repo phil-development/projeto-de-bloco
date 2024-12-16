@@ -20,6 +20,7 @@ export const Logo = styled.h1<{ isOpen: boolean }>`
     z-index: 3;
     margin: 0 1rem;
     font-size: clamp(1.5rem, 1vw, 3rem); 
+    font-weight: 500;
     display: block;
 
     @media (max-width: 524px) {

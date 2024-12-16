@@ -18,7 +18,7 @@ export const Container = styled.div`
         background: transparent;
         padding: 4px 4px 4px 0;
         color: ${({ theme }) => theme.colors.text};
-        letter-spacing: .1rem;
+        font-family: sans-serif;
 
         &::placeholder {
 

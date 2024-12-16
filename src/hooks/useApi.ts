@@ -15,21 +15,29 @@ const useApi = <T>({ method, url, params, data }: UseApiOptions) => {
 
   const fetchData = useCallback(async () => {
 
+    setLoading(true);
+    
     try {
+      
       const res = await api.request({
         method,
         url,
         params,
         data,
       });
-
+    
       setResponse(res.data);
+    
     } catch (err) {
+
       setError(err as Error);
+    
     } finally {
+    
       setLoading(false);
+    
     }
-  }, [method, url, params]);
+  }, [method, url, params, data]);
 
   useEffect(() => {
     fetchData();

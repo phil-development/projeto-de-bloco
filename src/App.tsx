@@ -1,4 +1,4 @@
-import { SupabaseContextProvider, ThemeContextProvider } from './context';
+import { SupabaseContextProvider, ThemeContextProvider, SearchProvider } from './context';
 
 import GlobalStyle from './styles/global';
 
@@ -6,12 +6,16 @@ import Routes from './routes';
 
 const App: React.FC = () => {
   return (
+
     <SupabaseContextProvider>
       <ThemeContextProvider>
-        <GlobalStyle />
-        <Routes />
+        <SearchProvider>
+          <GlobalStyle />
+          <Routes />
+        </SearchProvider>
       </ThemeContextProvider>
     </SupabaseContextProvider>
+
   );
 };
 
