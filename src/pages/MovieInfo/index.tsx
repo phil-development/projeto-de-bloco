@@ -27,7 +27,7 @@ interface MovieApiResponse extends Movie {
     }
 }
 
-export default function MovieInfo() {
+const MovieInfo: React.FC = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -42,7 +42,7 @@ export default function MovieInfo() {
 
     if (error) {
         return (
-            <div>Erro: {error}</div>
+            <div>Erro: {error.message}</div>
         );
     }
 
@@ -115,3 +115,5 @@ export default function MovieInfo() {
         return <div>Erro ao carregar informações do filme.</div>;
     }
 };
+
+export default MovieInfo;

@@ -1,7 +1,7 @@
-import usePersistedState from "../../utils/usePersistedState";
+import usePersistedState from "../../hooks/usePersistedState";
 
 import { createContext, useCallback, useContext } from "react";
-import { DefaultTheme, ThemeProvider } from "styled-components";
+import { DefaultTheme, ThemeProvider as StyledThemeProvider } from "styled-components";
 
 import dark from "../../styles/themes/dark";
 import light from "../../styles/themes/light";
@@ -12,18 +12,16 @@ const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 
 export const useTheme = () => useContext(ThemeContext);
 
-export const CustomThemeProvider = ({ children }: MainProps) => {
-    const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', dark);
+export const ThemeContextProvider = ({ children }: MainProps) => {
+  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', dark);
 
-    const toggleTheme = useCallback(() => setTheme(theme.title === 'light' ? dark : light), [theme]);
+  const toggleTheme = useCallback(() => setTheme(theme.title === 'light' ? dark : light), [theme]);
 
-    return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
-            <ThemeProvider theme={theme}>
-                {children}
-            </ThemeProvider>
-        </ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <StyledThemeProvider theme={theme}>
+        {children}
+      </StyledThemeProvider>
+    </ThemeContext.Provider>
+  );
 };
-
-export default ThemeProvider;

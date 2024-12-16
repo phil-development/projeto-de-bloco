@@ -4,8 +4,9 @@ import { FaMoon } from "react-icons/fa";
 import { MdWbSunny } from "react-icons/md";
 
 import { useTheme } from '../../context/Theme';
+import React from "react";
 
-export default function ToggleTheme() {
+const ToggleTheme: React.FC = () => {
 
     const { toggleTheme, theme } = useTheme();
 
@@ -19,3 +20,5 @@ export default function ToggleTheme() {
         </Container>
     );
 };
+
+export default ToggleTheme;

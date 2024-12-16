@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
     Container,
     LeftContent,
@@ -18,7 +18,7 @@ import { FaStar } from "react-icons/fa";
 import Search from '../Search/';
 import ToggleTheme from '../ToggleTheme';
 
-export default function Menu() {
+export const Menu: React.FC = () => {
 
     const [lateralNavigationState, setLateralNavigationState] = useState(false);
     const [lateralItemsState, setLateralItemsState] = useState(false);
@@ -88,3 +88,5 @@ export default function Menu() {
         </Container>
     );
 };
+
+export default Menu;

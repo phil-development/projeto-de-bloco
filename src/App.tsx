@@ -1,14 +1,18 @@
-import { CustomThemeProvider } from './context/Theme';
+import { SupabaseContextProvider, ThemeContextProvider } from './context';
 
 import GlobalStyle from './styles/global';
 
 import Routes from './routes';
 
-export default function App() {
+const App: React.FC = () => {
   return (
-    <CustomThemeProvider>
-      <GlobalStyle />
-      <Routes />
-    </CustomThemeProvider>
+    <SupabaseContextProvider>
+      <ThemeContextProvider>
+        <GlobalStyle />
+        <Routes />
+      </ThemeContextProvider>
+    </SupabaseContextProvider>
   );
 };
+
+export default App;

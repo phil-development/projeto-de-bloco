@@ -4,7 +4,7 @@ import { LoadContainer } from './styles';
 
 import { useTheme } from '../../context/Theme';
 
-export default function Loading() {
+const Loading: React.FC = () => {
 
     const { theme } = useTheme();
 
@@ -14,3 +14,5 @@ export default function Loading() {
         </LoadContainer>
     );
 };
+
+export default Loading;

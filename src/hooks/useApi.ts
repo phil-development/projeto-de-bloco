@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import api from '../config/api';
 
 interface UseApiOptions {
@@ -9,34 +9,31 @@ interface UseApiOptions {
 }
 
 const useApi = <T>({ method, url, params, data }: UseApiOptions) => {
-
   const [response, setResponse] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+
+  const fetchData = useCallback(async () => {
+
+    try {
+      const res = await api.request({
+        method,
+        url,
+        params,
+        data,
+      });
+
+      setResponse(res.data);
+    } catch (err) {
+      setError(err as Error);
+    } finally {
+      setLoading(false);
+    }
+  }, [method, url, params]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        
-        const res = await api.request({
-          method,
-          url,
-          params,
-          data,
-        });
-        
-        setResponse(res.data);
-
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
-    
-  }, [method, url, params, data]);
+  }, [fetchData]);
 
   return { response, loading, error };
 };

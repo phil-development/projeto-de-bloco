@@ -1,9 +1,9 @@
+import React from "react";
 import { Container } from "./styles";
 
 import { IoIosSearch } from "react-icons/io";
 
-//EM PRODUÇÃO! Não deu tempo de fazer a funcionalidade kkk
-export default function Search() {
+export const Search: React.FC = () => {
     return (
         <Container>
 
@@ -18,3 +18,5 @@ export default function Search() {
         </Container>
     );
 };
+
+export default Search;

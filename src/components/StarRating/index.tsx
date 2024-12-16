@@ -1,14 +1,15 @@
+import React from "react";
 import { MovieRate } from "./styles";
 
 import { FaRegStar, FaStar } from "react-icons/fa6";
 
-interface Props {
+interface StarRatingProps {
 
     rating: number;
 
 }
 
-export default function StarRating(props: Props) {
+const StarRating: React.FC<StarRatingProps> = (props) => {
 
     const numStars = Math.round(props.rating / 2);
 
@@ -43,3 +44,5 @@ export default function StarRating(props: Props) {
         </MovieRate>
     );
 };
+
+export default StarRating;

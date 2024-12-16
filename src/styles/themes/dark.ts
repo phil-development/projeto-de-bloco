@@ -9,9 +9,9 @@ export default {
 
         primary: '#5A8FE6',
         secondary: '#5A8FE6',
-        background: '#141414',
-        component: '#000000',
-        items: '#23242b',
+        background: '#242424',
+        component: '#141414',
+        items: '#35353b',
         text: '#f9fdf1',
 
     }

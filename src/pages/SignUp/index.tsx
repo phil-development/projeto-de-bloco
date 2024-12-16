@@ -1,8 +1,8 @@
 import React from "react";
-import useSignIn from "../../hooks/useSignIn";
+import useSignUp from "../../hooks/useSignUp";
 import { AuthForm, Popup } from "../../components/";
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   const {
     email,
     setEmail,
@@ -10,19 +10,19 @@ const SignIn: React.FC = () => {
     setPassword,
     loading,
     error,
-    signIn,
+    signUp,
     showPopUp,
     handleClosePopUp,
-  } = useSignIn();
+  } = useSignUp();
 
   return (
     <div>
       <AuthForm
-        title="Entrar"
-        submitText="Enviar"
-        linkTo="/signUp"
-        linkText="Ainda não tem uma conta? Cadastre-se"
-        onSubmit={signIn}
+        title="Cadastrar" 
+        submitText="Enviar" 
+        linkTo="/signIn"
+        linkText="Já possui uma conta? Entrar" 
+        onSubmit={signUp}
         error={error ? `${error}` : null}
         loading={loading}
         email={email}
@@ -35,13 +35,13 @@ const SignIn: React.FC = () => {
         <Popup
           isOpen={showPopUp}
           onClose={handleClosePopUp}
-          title="Login bem-sucedido!"
-          message="Você será redirecionado para a página inicial em breve..."
-          autoCloseDuration={5000}
+          title="Cadastro realizado com sucesso!" 
+          message="Verifique sua caixa de entrada e confirme seu email para ativar sua conta." 
+          autoCloseDuration={5000} 
         />
       )}
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;

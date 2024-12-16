@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, Description, Info, Poster, HiddenContent, Button } from "./styles";
 
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ interface CardProps {
 
 };
 
-export default function MovieCard({ data }: CardProps) {
+const MovieCard: React.FC<CardProps> = ({ data }) => {
 
     const [isHovered, setIsHovered] = useState(false);
 
@@ -65,3 +65,5 @@ export default function MovieCard({ data }: CardProps) {
         </Card>
     );
 };
+
+export default MovieCard;

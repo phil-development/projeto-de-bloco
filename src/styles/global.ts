@@ -13,8 +13,8 @@ export default createGlobalStyle`
         width: 100%;
         min-height: 100vh;
 
-        background-color: ${props => props.theme.colors.background};
-        color: ${props => props.theme.colors.text};
+        background-color: ${({theme}) => theme.colors.background};
+        color: ${({theme}) => theme.colors.text};
         font-family: sans-serif;
     }
 

@@ -5,7 +5,7 @@ import PrivateRoute from './PrivateRoute';
 
 import Home from '../pages/Home/';
 import SignIn from '../pages/SignIn/';
-import Callback from '../pages/Callback';
+import SignUp from '../pages/SignUp/';
 import MovieInfo from '../pages/MovieInfo';
 
 const AppRoutes: React.FC = () => {
@@ -13,7 +13,7 @@ const AppRoutes: React.FC = () => {
         <BrowserRouter basename="/">
             <Routes>
                 <Route path="/signIn" element={<PublicRoute><SignIn /></PublicRoute>} />
-                <Route path="/callback" element={<Callback />} />
+                <Route path="/signUp" element={<PublicRoute><SignUp /></PublicRoute>} />
                 <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
                 <Route path='/movieInfo/:id' element={<PrivateRoute><MovieInfo /></PrivateRoute>} />
             </Routes>

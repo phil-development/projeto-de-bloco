@@ -2,7 +2,7 @@ import { Container, Content } from './styles';
 
 import { Menu, MovieList, Footer } from '../../components/';
 
-export default function Home() {
+const Home: React.FC = () => { 
 
     return (
         <Container>
@@ -20,3 +20,5 @@ export default function Home() {
         </Container>
     );
 };
+
+export default Home;

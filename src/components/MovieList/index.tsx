@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Movie } from "../../types";
 
@@ -10,9 +10,10 @@ import Loading from "../Loading";
 
 import useApi from '../../hooks/useApi';
 
-export default function MovieList() {
+const MovieList: React.FC = () => {
 
     const [movies, setMovies] = useState<Movie[]>([]);
+    const [fetched, setFetched] = useState(false);
 
     const { response, loading, error } = useApi<{ results: Movie[] }>({
         method: 'get',
@@ -23,10 +24,12 @@ export default function MovieList() {
     });
 
     useEffect(() => {
-        if (response) {
+        if (response && !fetched) {
             setMovies(response.results);
+            setFetched(true);
         }
-    }, [response]);
+    }, [response, fetched]);
+
 
     if (loading) {
         return (
@@ -36,7 +39,7 @@ export default function MovieList() {
 
     if (error) {
         return (
-            <div>Erro: {error}</div>
+            <div>Erro: {error.message}</div>
         );
     }
 
@@ -48,3 +51,5 @@ export default function MovieList() {
         </List>
     );
 };
+
+export default MovieList;
